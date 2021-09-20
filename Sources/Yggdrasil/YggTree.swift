@@ -128,37 +128,16 @@ extension YggTree {
     
     for (key, item) in elements {
       if item is Array<Any> {
-        print("kid_itm:\(key)")
-        
-        var itemHash: [String: Any] = [:]
-        
-        for itm in item as? [Any] ?? [] {
-          print("\(itm)")
-          let itmKids = itm as! [String: Any]
-          itemHash[ itmKids["id"] as? String ?? "" ] = itm
-        }
-        
-        var kid = YggTree(name: key, elements: itemHash, depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
+        var kid = YggTree(name: key, elements: [:], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
         self.children.safeAppend(element: kid)
-        
-        //runningBreadcrumb.append(YggTwig(from: self))
-        for itm in (item as! Array<Any>) {
-
-          let gkid = YggTree(elements: itm as! [String: Any], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
-          kid.children.safeAppend(element: gkid)
-        }
-        
       } else {
         self.attributes[key] = "\(item)"
       }
       
     }
-    
-//    if !attributes.keys.contains("Name") {
-//      attributes["Name"] = name
-//    }
-    
   }
+  
+  
 }
 
 extension Optional where Wrapped == [YggTree] {
