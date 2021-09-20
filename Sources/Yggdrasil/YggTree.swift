@@ -135,7 +135,7 @@ extension YggTree {
         for itm in item as? [Any] ?? [] {
           print("\(itm)")
           let itmKids = itm as! [String: Any]
-          itemHash[ itmKids["id"] as! String ] = itm as! [String: Any]
+          itemHash[ itmKids["id"] as! String ] = itm
         }
         
         let kid = YggTree(name: key, elements: itemHash, depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
