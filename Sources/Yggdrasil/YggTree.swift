@@ -26,17 +26,22 @@ public struct YggTree: Identifiable {
   public var parentId: UUID?
   
   public var nameAttribute: String? {
-    guard attributes.keys.contains("Name") else {
+    guard attributes.keys.map({$0.lowercased()}).contains("name") else {
       return nil
     }
-    return attributes["Name"]
+    
+    var lowered = attributes
+    lowered.lowercaseKeys()
+    return lowered["name"]
   }
   
   public var idAttribute: String? {
-    guard attributes.keys.contains("Id") else {
+    guard attributes.keys.map({$0.lowercased()}).contains("id") else {
       return nil
     }
-    return attributes["Id"]
+    var lowered = attributes
+    lowered.lowercaseKeys()
+    return lowered["id"]
   }
   
   public var namedBreadcrumbs: String {
@@ -200,4 +205,13 @@ public enum YggError: Error {
     case couldNotDecodeClass(String)
     case attributeNotFound(String)
     case problemDecodingNode(String)
+}
+
+
+extension Dictionary where Key: ExpressibleByStringLiteral {
+    mutating func lowercaseKeys() {
+        for key in self.keys {
+            self["\(key)".lowercased() as! Key] = self.removeValue(forKey: key)
+        }
+    }
 }
