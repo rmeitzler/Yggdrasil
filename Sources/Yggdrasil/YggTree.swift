@@ -139,6 +139,11 @@ extension YggTree {
       }
       
     }
+    
+    if !attributes.keys.contains("Name") {
+      attributes["Name"] = name
+    }
+    
   }
 }
 
