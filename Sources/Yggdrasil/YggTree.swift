@@ -128,7 +128,7 @@ extension YggTree {
     
     for (key, item) in elements {
       if item is Array<Any> {
-        var kid = YggTree(name: key, elements: [:], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
+        var kid = YggTree(name: key, elements: item as! [Any], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
         self.children.safeAppend(element: kid)
       } else {
         self.attributes[key] = "\(item)"
