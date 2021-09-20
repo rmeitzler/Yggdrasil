@@ -137,6 +137,25 @@ extension YggTree {
     }
   }
   
+  public init(name: String = "", elements: [Any], depth: Int = 0, breadcrumb: [YggTwig] = [], parentId: UUID? = nil) {
+    self.id = UUID()
+    self.name = name
+    self.depth = depth
+    self.attributes = [:]
+    self.breadcrumb = breadcrumb
+    if let parent = parentId {
+      self.parentId = parent
+    }
+    
+    var runningBreadcrumb: [YggTwig] = breadcrumb
+    runningBreadcrumb.append(YggTwig(from: self))
+    
+    for item in elements {
+      let kid = YggTree(elements: item as! [String: Any], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
+      self.children.safeAppend(element: kid)
+    }
+
+  }
   
 }
 
