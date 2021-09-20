@@ -130,6 +130,12 @@ extension YggTree {
       if item is Array<Any> {
         print("kid_itm:\(key)")
         
+        var itemHash: [String: Any] = [:]
+        
+        for itm in item as? [Any] ?? [] {
+          print("\(itm)")
+        }
+        
         let kid = YggTree(name: key, elements: item as? [String: Any] ?? [:], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
         self.children.safeAppend(element: kid)
         
