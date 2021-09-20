@@ -130,7 +130,7 @@ extension YggTree {
       if item is Array<Any> {
         print("kid_itm:\(key)")
         
-        let kid = YggTree(name: key, elements: item as? [String: Any] ?? [], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
+        let kid = YggTree(name: key, elements: item as? [String: Any] ?? [:], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
         self.children.safeAppend(element: kid)
         
         //runningBreadcrumb.append(YggTwig(from: self))
