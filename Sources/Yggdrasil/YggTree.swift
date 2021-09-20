@@ -11,7 +11,7 @@ public protocol YggDecodable {
   init(from ygg: YggTree) throws
 }
 
-public struct YggTree {
+public struct YggTree: Identifiable {
   
   public typealias Attributes = [String : String]
   
@@ -42,10 +42,6 @@ public struct YggTree {
   public var namedBreadcrumbs: String {
     return breadcrumb.map({$0.name}).joined(separator: ">")
   }
-}
-
-extension YggTree: Identifiable {
-  
 }
 
 extension YggTree: Equatable {
@@ -128,10 +124,11 @@ extension YggTree {
     }
     
     var runningBreadcrumb: [YggTwig] = breadcrumb
+    runningBreadcrumb.append(YggTwig(from: self))
     
     for (key, item) in elements {
       if item is Array<Any> {
-        runningBreadcrumb.append(YggTwig(from: self))
+        //runningBreadcrumb.append(YggTwig(from: self))
         for itm in (item as! Array<Any>) {
           let kid = YggTree(name: key, elements: itm as! [String: Any], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
           self.children.safeAppend(element: kid)
