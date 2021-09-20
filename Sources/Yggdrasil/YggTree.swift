@@ -44,6 +44,10 @@ public struct YggTree {
   }
 }
 
+extension YggTree: Identifiable {
+  
+}
+
 extension YggTree: Equatable {
   public static func == (lhs: YggTree, rhs: YggTree) -> Bool {
     lhs.id == rhs.id
