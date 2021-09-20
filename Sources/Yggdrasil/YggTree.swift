@@ -128,9 +128,10 @@ extension YggTree {
     
     for (key, item) in elements {
       if item is Array<Any> {
+        print("kid_itm:\(key)")
         //runningBreadcrumb.append(YggTwig(from: self))
         for itm in (item as! Array<Any>) {
-          print("kid_itm:\(key)")
+          
           //let kid = YggTree(name: "", elements: itm as! [String: Any], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
           //self.children.safeAppend(element: kid)
         }
