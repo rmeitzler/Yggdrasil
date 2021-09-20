@@ -8,7 +8,7 @@
 import Foundation
 
 @available(iOS 15.0.0, *)
-class Yggdrasil: ObservableObject {
+public class Yggdrasil: ObservableObject {
   @Published var data: Data?
   @Published public var treeData: YggTree?
   
