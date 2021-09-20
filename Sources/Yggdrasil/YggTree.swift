@@ -138,15 +138,15 @@ extension YggTree {
           itemHash[ itmKids["id"] as! String ] = itm
         }
         
-        let kid = YggTree(name: key, elements: itemHash, depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
+        var kid = YggTree(name: key, elements: itemHash, depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
         self.children.safeAppend(element: kid)
         
         //runningBreadcrumb.append(YggTwig(from: self))
-//        for itm in (item as! Array<Any>) {
-//
-//          let kid = YggTree(elements: itm as! [String: Any], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
-//          self.children.safeAppend(element: kid)
-//        }
+        for itm in (item as! Array<Any>) {
+
+          let gkid = YggTree(elements: itm as! [String: Any], depth: depth + 1, breadcrumb: runningBreadcrumb, parentId: self.id)
+          kid.children.safeAppend(element: gkid)
+        }
         
       } else {
         self.attributes[key] = "\(item)"
